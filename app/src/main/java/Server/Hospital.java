@@ -21,4 +21,8 @@ public class Hospital{
     public ArrayList<Appointment> getAllAppointments() {
         return this.appointments;
     }
+
+    public void AddPatient(Patient patient) {
+        this.patients.add(patient);
+    }
 }
