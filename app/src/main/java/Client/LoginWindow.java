@@ -24,7 +24,6 @@ public class LoginWindow {
         frame.add(userLabel);
 
         JTextField userName = new JTextField();
-        userName.setText("Enter your Username");
         userName.setBounds(100,20, 165,25);
 
         JLabel passwordLabel = new JLabel("Password");
@@ -32,7 +31,6 @@ public class LoginWindow {
         frame.add(passwordLabel);
 
         JPasswordField password = new JPasswordField();
-        password.setText("Enter your password");
         password.setBounds(100,50, 165,25);
 
         JButton login = new JButton("Login");
@@ -126,9 +124,10 @@ public class LoginWindow {
         frame.setSize(400, 300);
         
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(3, 1));
+        buttonPanel.setLayout(new GridLayout(4, 1));
 
         JButton add = new JButton("Register a new patient");
+        JButton edit = new JButton("Edit patient details");
         JButton delete = new JButton("Delete a patient");
         JButton view = new JButton("View all patient records");
 
@@ -136,6 +135,12 @@ public class LoginWindow {
         add.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 addPatientMenu();
+            }
+        });
+
+        edit.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                editPatientMenu();
             }
         });
 
@@ -154,10 +159,14 @@ public class LoginWindow {
 
         buttonPanel.add(add);
         buttonPanel.add(delete);
+        buttonPanel.add(edit);
         buttonPanel.add(view);
 
         frame.add(buttonPanel);
         frame.setVisible(true);        
+    }
+
+    protected void editPatientMenu() {
     }
 
     protected void viewPatientsMenu() {
@@ -167,6 +176,44 @@ public class LoginWindow {
     }
 
     protected void addPatientMenu() {
+        frame = new JFrame("Register New Patient");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(400, 300);
+
+        JPanel panel = new JPanel();
+        
+        JLabel nameLabel = new JLabel("Name");
+        nameLabel.setBounds(10,20,80,25);
+        panel.add(nameLabel);
+
+        JTextField name = new JTextField();
+        name.setBounds(100,20, 165,25);
+        panel.add(name);
+
+        JLabel emailLabel = new JLabel("Email");
+        emailLabel.setBounds(10,50,80,25);
+        panel.add(emailLabel);
+
+        JTextField email = new JTextField();
+        email.setBounds(100,50, 165,25);
+        panel.add(email);
+
+        JLabel issueLabel = new JLabel("Issue");
+        issueLabel.setBounds(10,80, 165,25);
+        panel.add(issueLabel);
+
+        JTextField issue = new JTextField();
+        issue.setBounds(100,80, 165,50);
+        panel.add(issue);
+
+        JButton addButton = new JButton("Register");
+        addButton.setBounds(10, 135, 100, 25);
+        panel.add(addButton);
+
+        frame.add(panel);
+        panel.setLayout(null);
+        frame.setVisible(true);  
+
     }
 
 
