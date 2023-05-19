@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class LoginWindow {
@@ -15,6 +16,7 @@ public class LoginWindow {
 
     public void loginWindow(){
         frame = new JFrame();
+        frame.setSize(400,400);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JLabel userLabel = new JLabel("Username");
@@ -29,7 +31,7 @@ public class LoginWindow {
         passwordLabel.setBounds(10,50,80,25);
         frame.add(passwordLabel);
 
-        JTextField password = new JTextField();
+        JPasswordField password = new JPasswordField();
         password.setText("Enter your password");
         password.setBounds(100,50, 165,25);
 
@@ -46,6 +48,7 @@ public class LoginWindow {
         frame.add(password);
         frame.add(login);
 
+        frame.setLayout(null);
         frame.setVisible(true);
 
     }
@@ -56,7 +59,7 @@ public class LoginWindow {
         frame.setSize(400, 300);
         
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(3, 1));
+        buttonPanel.setLayout(new GridLayout(5, 1));
 
         JButton patients = new JButton("Patient Management");
         JButton appointments = new JButton("Appointment Management");
@@ -93,9 +96,19 @@ public class LoginWindow {
                 staffMenu();
             }
         });
+
+        buttonPanel.add(patients);
+        buttonPanel.add(appointments);
+        buttonPanel.add(inventory);
+        buttonPanel.add(tests);
+        buttonPanel.add(staffs);
+
+        frame.add(buttonPanel);
+        frame.setVisible(true);
+
     }
 
-    protected void staffMenu() {
+    public void staffMenu() {
     }
 
     protected void testMenu() {
@@ -108,7 +121,54 @@ public class LoginWindow {
     }
 
     public void patientMenu() {
+        frame = new JFrame("Patient Menu");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(400, 300);
+        
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new GridLayout(3, 1));
+
+        JButton add = new JButton("Register a new patient");
+        JButton delete = new JButton("Delete a patient");
+        JButton view = new JButton("View all patient records");
+
+
+        add.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                addPatientMenu();
+            }
+        });
+
+        delete.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                deletePatientMenu();
+            }
+        });
+
+        view.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                viewPatientsMenu();
+            }
+        });
+
+
+        buttonPanel.add(add);
+        buttonPanel.add(delete);
+        buttonPanel.add(view);
+
+        frame.add(buttonPanel);
+        frame.setVisible(true);        
     }
+
+    protected void viewPatientsMenu() {
+    }
+
+    protected void deletePatientMenu() {
+    }
+
+    protected void addPatientMenu() {
+    }
+
 
 
 }
