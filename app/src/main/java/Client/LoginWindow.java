@@ -1,18 +1,28 @@
 package Client;
 
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.concurrent.CompletableFuture;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import Server.HealthHive;
+import Server.Patient;
+
 public class LoginWindow {
     JFrame frame;
+    HealthHive healthHive = new HealthHive();
+    CompletableFuture<Patient> patienCompletableFuture = new CompletableFuture<>();
 
     public void loginWindow(){
         frame = new JFrame();
@@ -173,6 +183,21 @@ public class LoginWindow {
     }
 
     protected void deletePatientMenu() {
+        CompletableFuture<Patient> patientFuture = getWhichPatient(healthHive.getAllPatients());
+        patientFuture.thenAccept(patient -> {
+            // Perform actions with the selected patient
+            if (patient != null) {
+                // Delete the patient
+                healthHive.deletePatient(patient);
+            } else {
+                // Handle invalid selection
+                System.out.println("Invalid selection");
+            }
+        }).exceptionally(ex -> {
+            // Handle exception
+            System.out.println("Error selecting patient: " + ex.getMessage());
+            return null;
+        });
     }
 
     protected void addPatientMenu() {
@@ -186,34 +211,101 @@ public class LoginWindow {
         nameLabel.setBounds(10,20,80,25);
         panel.add(nameLabel);
 
-        JTextField name = new JTextField();
-        name.setBounds(100,20, 165,25);
-        panel.add(name);
+        JTextField nameField = new JTextField();
+        nameField.setBounds(100,20, 165,25);
+        panel.add(nameField);
 
         JLabel emailLabel = new JLabel("Email");
         emailLabel.setBounds(10,50,80,25);
         panel.add(emailLabel);
 
-        JTextField email = new JTextField();
-        email.setBounds(100,50, 165,25);
-        panel.add(email);
+        JTextField emailField = new JTextField();
+        emailField.setBounds(100,50, 165,25);
+        panel.add(emailField);
+
+        JLabel ageLabel = new JLabel("Age"); 
+        ageLabel.setBounds(10, 80, 80, 25);
+        panel.add(ageLabel);
+
+        JTextField ageField = new JTextField();
+        ageField.setBounds(100, 80, 80, 25);
+        panel.add(ageField);
 
         JLabel issueLabel = new JLabel("Issue");
-        issueLabel.setBounds(10,80, 165,25);
+        issueLabel.setBounds(10,110, 165,25);
         panel.add(issueLabel);
 
-        JTextField issue = new JTextField();
-        issue.setBounds(100,80, 165,50);
-        panel.add(issue);
+        JTextField issueField = new JTextField();
+        issueField.setBounds(100,110, 165,50);
+        panel.add(issueField);
 
         JButton addButton = new JButton("Register");
-        addButton.setBounds(10, 135, 100, 25);
+        addButton.setBounds(10, 185, 100, 25);
         panel.add(addButton);
+
+        addButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String name = nameField.getText();
+                String email = emailField.getText();
+                Integer age = Integer.parseInt(ageField.getText());
+                String issue = issueField.getText();
+
+                healthHive.addPatient(name, email, age, issue);
+                JOptionPane.showMessageDialog(frame, "The registration is successful");
+            }
+        });
 
         frame.add(panel);
         panel.setLayout(null);
         frame.setVisible(true);  
 
+    }
+
+    public CompletableFuture<Patient> getWhichPatient(ArrayList<Patient> allPatients) {
+        frame = new JFrame("Select a Patient");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new FlowLayout());
+
+        JLabel label = new JLabel("Select a Patient: ");
+        panel.add(label);
+
+        JComboBox<String> patientComboBox = new JComboBox<>();
+        for (Patient patient : allPatients) {
+            patientComboBox.addItem(patient.getName());
+        }
+        panel.add(patientComboBox);
+
+        JButton button = new JButton("Select");
+        button.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String selectedPatient = (String) patientComboBox.getSelectedItem();
+                Patient patient = getPatientByName(allPatients, selectedPatient);
+                if (patient != null) {
+                    patienCompletableFuture.complete(patient);
+                }else {
+                    patienCompletableFuture.completeExceptionally(new Exception("Invalid selection"));
+                }
+            }
+        });
+
+        panel.add(button);
+        frame.add(panel);
+        frame.pack();
+        frame.setVisible(true);
+
+        return patienCompletableFuture;
+    }
+
+    private Patient getPatientByName(ArrayList<Patient> allPatients, String patientName) {
+        for (Patient patient : allPatients) {
+            if (patient.getName().equals(patientName)) {
+                return patient;
+            }
+        }
+        return null;
     }
 
 

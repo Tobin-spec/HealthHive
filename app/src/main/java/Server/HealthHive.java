@@ -1,5 +1,7 @@
 package Server;
 
+import java.util.ArrayList;
+
 import Client.LoginWindow;
 
 public class HealthHive {
@@ -8,6 +10,14 @@ public class HealthHive {
     public void addPatient(String name, String email, Integer age, String issue) {
         Patient patient =  new Patient(name, email, age, issue);
         hospital.AddPatient(patient);
+    }
+
+    public ArrayList<Patient> getAllPatients() {
+        return hospital.getAllPatients();
+    }
+
+    public void deletePatient(Patient patient) {
+        hospital.deletePatient(patient);
     }
 
     public void donothing() {
