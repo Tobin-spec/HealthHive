@@ -178,6 +178,76 @@ public class LoginWindow {
     }
 
     protected void editPatientMenu() {
+        getWhichPatient(healthHive.getAllPatients(), patient -> {
+            SwingUtilities.invokeLater(() -> {
+                if (patient != null) {
+                    showPatientDetailsEdit(patient);
+                } else {
+                    JOptionPane.showMessageDialog(frame, "Invalid selection");
+                }
+            });
+        });
+    }
+
+    private void showPatientDetailsEdit(Patient patient) {
+        frame = new JFrame("Edit Patient " + patient.getName());
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setSize(400, 300);
+
+        JPanel panel = new JPanel();
+
+        JLabel nameLabel = new JLabel("Name");
+        nameLabel.setBounds(10, 20, 80, 25);
+        panel.add(nameLabel);
+
+        JTextField nameField = new JTextField(patient.getName());
+        nameField.setBounds(100, 20, 165, 25);
+        panel.add(nameField);
+
+        JLabel emailLabel = new JLabel("Email");
+        emailLabel.setBounds(10, 50, 80, 25);
+        panel.add(emailLabel);
+
+        JTextField emailField = new JTextField(patient.getEmail());
+        emailField.setBounds(100, 50, 165, 25);
+        panel.add(emailField);
+
+        JLabel ageLabel = new JLabel("Age");
+        ageLabel.setBounds(10, 80, 80, 25);
+        panel.add(ageLabel);
+
+        JTextField ageField = new JTextField(patient.getAge().toString());
+        ageField.setBounds(100, 80, 80, 25);
+        panel.add(ageField);
+
+        JLabel issueLabel = new JLabel("Issue");
+        issueLabel.setBounds(10, 110, 165, 25);
+        panel.add(issueLabel);
+
+        JTextField issueField = new JTextField(patient.getIssue());
+        issueField.setBounds(100, 110, 165, 50);
+        panel.add(issueField);
+
+        JButton save = new JButton("Save");
+        save.setBounds(100, 185, 100, 25);
+
+        save.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String name = nameField.getText();
+                String email = emailField.getText();
+                Integer age = Integer.parseInt(ageField.getText());
+                String issue = issueField.getText();
+
+                healthHive.editPatient(patient, name, email, age, issue);
+                JOptionPane.showMessageDialog(frame, "The Details has been updated Successfully!");
+            }
+        });
+
+        panel.add(save);
+
+        frame.add(panel);
+        panel.setLayout(null);
+        frame.setVisible(true);
     }
 
     protected void viewPatientsMenu() {

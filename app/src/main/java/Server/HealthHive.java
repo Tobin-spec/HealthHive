@@ -20,6 +20,17 @@ public class HealthHive {
         hospital.deletePatient(patient);
     }
 
+    public void editPatient(Patient patient, String name, String email, Integer age, String issue) {
+        for (Patient p: getAllPatients()) {
+            if (p.equals(patient)) {
+                p.setName(name);
+                p.setEmail(email);
+                p.setAge(age);
+                p.setIssue(issue);
+            }
+        }
+    }
+
     public void donothing() {
     }
     public static void main(String[] args) {
