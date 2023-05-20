@@ -76,7 +76,8 @@ public class LoginWindow {
 
         appointments.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                appointmentMenu();
+                AppointmentMenu appointmentMenu = new AppointmentMenu();
+                appointmentMenu.appointmentMenu(healthHive);
             }
         });
 
@@ -117,7 +118,5 @@ public class LoginWindow {
 
     protected void inventoryMenu() {
     }
-
-    protected void appointmentMenu() {
-    }
+   
 }
