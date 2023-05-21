@@ -44,10 +44,21 @@ public class HealthHive {
         }
     }
 
+    
+    public void editAppointment(Appointment appointment, Doctor doctor, String time) {
+        for (Appointment a: getAllAppointments()) {
+            if (a.equals(appointment)){
+                a.setDoctor(doctor);
+                a.setTime(time);
+            }
+        }
+    }
+
     public void donothing() {
     }
     public static void main(String[] args) {
         LoginWindow start = new LoginWindow();
         start.loginWindow();
     }
+
 }

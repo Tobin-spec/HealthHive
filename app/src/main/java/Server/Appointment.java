@@ -44,5 +44,5 @@ public class Appointment{
     public Doctor getDoctor() {
         return this.doctor;
     }
- 
+
 }

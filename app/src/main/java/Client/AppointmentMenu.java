@@ -83,6 +83,7 @@ public class AppointmentMenu extends LoginWindow{
 
                                 frame = new JFrame("Create an Appointment");
                                 frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                                frame.setSize(400, 400);
                         
                                 JPanel panel = new JPanel();
                                 panel.setLayout(null);
@@ -195,7 +196,7 @@ public class AppointmentMenu extends LoginWindow{
                             if (doctor != null) {
                                 Doctor selectedDoctor = doctor;
 
-                                frame = new JFrame("Create an Appointment");
+                                frame = new JFrame("Edit the Appointment " + selectedAppointment.getId());
                                 frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                         
                                 JPanel panel = new JPanel();
@@ -205,7 +206,7 @@ public class AppointmentMenu extends LoginWindow{
                                 patientLabel.setBounds(10, 20, 80, 25);
                                 panel.add(patientLabel);
                         
-                                JLabel patientJLabel = new JLabel(selectedAppointment.getId());
+                                JLabel patientJLabel = new JLabel(selectedAppointment.getPatient().getName());
                                 patientJLabel.setBounds(100, 20, 80, 25);
                                 panel.add(patientJLabel);
 
@@ -221,7 +222,7 @@ public class AppointmentMenu extends LoginWindow{
                                 time.setBounds(10,80, 80, 25);
                                 panel.add(time);
 
-                                JTextField timField = new JTextField();
+                                JTextField timField = new JTextField(selectedAppointment.getTime());
                                 timField.setBounds(100, 80, 80, 25);
                                 panel.add(timField);
 
@@ -232,8 +233,8 @@ public class AppointmentMenu extends LoginWindow{
                                     public void actionPerformed(ActionEvent e) {
                                         
                                         String time = timField.getText();
-                        
-
+                                        
+                                        healthHive.editAppointment(selectedAppointment, selectedDoctor, time);
                                         JOptionPane.showMessageDialog(frame, "The registration is successful");
                                     }
                                 });
@@ -262,7 +263,7 @@ public class AppointmentMenu extends LoginWindow{
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout());
 
-        JLabel label = new JLabel("Select a Doctor: ");
+        JLabel label = new JLabel("Select an Appointment: ");
         panel.add(label);
 
         JComboBox<String> DoctorComboBox = new JComboBox<>();
