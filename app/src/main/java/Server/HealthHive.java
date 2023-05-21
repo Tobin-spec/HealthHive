@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import Client.LoginWindow;
 
 public class HealthHive {
-    Hospital hospital = new Hospital();
+    static Hospital hospital = new Hospital();
 
     public void addPatient(String name, String email, Integer age, String issue) {
         Patient patient =  new Patient(name, email, age, issue);
@@ -22,6 +22,10 @@ public class HealthHive {
 
     public void deletePatient(Patient patient) {
         hospital.deletePatient(patient);
+    }
+
+    public ArrayList<Appointment> getAllAppointments() {
+        return hospital.getAllAppointments();
     }
 
     public void createAppointment(Patient patient, Doctor doctor, String time){

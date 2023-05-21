@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
+import Server.Appointment;
 import Server.Doctor;
 import Server.HealthHive;
 import Server.Patient;
@@ -184,6 +185,115 @@ public class AppointmentMenu extends LoginWindow{
     }
 
     protected void editAppointmentMenu() {
+        getWhichAppointment(healthHive.getAllAppointments(), appointment -> {
+            SwingUtilities.invokeLater(() -> {
+                if (appointment != null) {
+                    Appointment selectedAppointment = appointment;
+
+                    getWhichDoctor(healthHive.getAllDoctors(), doctor -> {
+                        SwingUtilities.invokeLater(() -> {
+                            if (doctor != null) {
+                                Doctor selectedDoctor = doctor;
+
+                                frame = new JFrame("Create an Appointment");
+                                frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                        
+                                JPanel panel = new JPanel();
+                                panel.setLayout(null);
+                        
+                                JLabel patientLabel = new JLabel("Patient");
+                                patientLabel.setBounds(10, 20, 80, 25);
+                                panel.add(patientLabel);
+                        
+                                JLabel patientJLabel = new JLabel(selectedAppointment.getId());
+                                patientJLabel.setBounds(100, 20, 80, 25);
+                                panel.add(patientJLabel);
+
+                                JLabel doctorLabel = new JLabel("Doctor");
+                                doctorLabel.setBounds(10, 50, 80, 25);
+                                panel.add(doctorLabel);
+                        
+                                JLabel doctorJLabel = new JLabel(selectedDoctor.getName());
+                                doctorJLabel.setBounds(100, 50, 80, 25);
+                                panel.add(doctorJLabel);
+
+                                JLabel time = new JLabel("Time");
+                                time.setBounds(10,80, 80, 25);
+                                panel.add(time);
+
+                                JTextField timField = new JTextField();
+                                timField.setBounds(100, 80, 80, 25);
+                                panel.add(timField);
+
+                                JButton save = new JButton("Save");
+                                save.setBounds(100, 80, 100, 25);
+
+                                save.addActionListener(new ActionListener() {
+                                    public void actionPerformed(ActionEvent e) {
+                                        
+                                        String time = timField.getText();
+                        
+
+                                        JOptionPane.showMessageDialog(frame, "The registration is successful");
+                                    }
+                                });
+
+                                panel.add(save);
+                                frame.add(panel);
+                                frame.pack();
+                                frame.setVisible(true);
+                            } else {
+                                JOptionPane.showMessageDialog(frame, "Invalid selection!");
+                            }
+                        });
+                    });
+                } else {
+                    JOptionPane.showMessageDialog(frame, "Invalid selection!");
+                }
+            });
+        });
+    }
+
+    public void getWhichAppointment(ArrayList<Appointment> allAppointments, Consumer<Appointment> callback) {
+        frame = new JFrame("Select an Appointment");
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setSize(400, 400);
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new FlowLayout());
+
+        JLabel label = new JLabel("Select a Doctor: ");
+        panel.add(label);
+
+        JComboBox<String> DoctorComboBox = new JComboBox<>();
+        for (Appointment appointment : allAppointments) {
+            DoctorComboBox.addItem(appointment.getId());
+        }
+        panel.add(DoctorComboBox);
+
+        JButton button = new JButton("Select");
+        button.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String selectedAppointment = (String) DoctorComboBox.getSelectedItem();
+                Appointment appointment = getAppointmentById(allAppointments, selectedAppointment);
+                callback.accept(appointment); // Invoke the callback with the selected patient
+                frame.dispose(); // Close the selection frame
+            }
+        });
+
+        panel.add(button);
+        frame.add(panel);
+        frame.pack();
+        frame.setVisible(true);
+    }
+
+    private Appointment getAppointmentById(ArrayList<Appointment> allAppointments, String appointmentId) {
+        for (Appointment appointment : allAppointments) {
+            if (appointment.getId().equals(appointmentId)) {
+                return appointment;
+            }
+        }
+        return null;
     }
 
     protected void viewAppointmentMenu() {

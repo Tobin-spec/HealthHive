@@ -2,6 +2,7 @@ package Server;
 
 
 public class Appointment{
+    private String id;
     private String time;
     private Patient patient;
     private Doctor doctor;
@@ -13,6 +14,11 @@ public class Appointment{
         this.time = time;
         this.patient = patient;
         this.doctor = doctor;
+        this.id = this.patient.getName() + " - " + this.doctor.getName();
+    }
+
+    public String getId() {
+        return this.id;
     }
 
     public void setTime(String time){
