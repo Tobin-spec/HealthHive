@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 import Server.Doctor;
@@ -101,11 +102,28 @@ public class AppointmentMenu extends LoginWindow{
                                 doctorJLabel.setBounds(100, 50, 80, 25);
                                 panel.add(doctorJLabel);
 
+                                JLabel time = new JLabel("Time");
+                                time.setBounds(10,80, 80, 25);
+                                panel.add(time);
+
+                                JTextField timField = new JTextField();
+                                timField.setBounds(100, 80, 80, 25);
+                                panel.add(timField);
+
                                 JButton save = new JButton("Save");
                                 save.setBounds(100, 80, 100, 25);
-                                panel.add(save);
 
+                                save.addActionListener(new ActionListener() {
+                                    public void actionPerformed(ActionEvent e) {
+                                        
+                                        String time = timField.getText();
                         
+                                        healthHive.createAppointment(selectedPatient, selectedDoctor, time);
+                                        JOptionPane.showMessageDialog(frame, "The registration is successful");
+                                    }
+                                });
+
+                                panel.add(save);
                                 frame.add(panel);
                                 frame.pack();
                                 frame.setVisible(true);
@@ -131,7 +149,7 @@ public class AppointmentMenu extends LoginWindow{
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout());
 
-        JLabel label = new JLabel("Select a Patient: ");
+        JLabel label = new JLabel("Select a Doctor: ");
         panel.add(label);
 
         JComboBox<String> DoctorComboBox = new JComboBox<>();
