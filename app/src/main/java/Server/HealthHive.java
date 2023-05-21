@@ -2,7 +2,7 @@ package Server;
 
 import java.util.ArrayList;
 
-import Client.LoginWindow;
+import Client.UserInterface;
 
 public class HealthHive {
     static Hospital hospital = new Hospital();
@@ -62,7 +62,7 @@ public class HealthHive {
     public void donothing() {
     }
     public static void main(String[] args) {
-        LoginWindow start = new LoginWindow();
+        UserInterface start = new UserInterface();
         start.loginWindow();
     }
 

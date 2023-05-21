@@ -11,7 +11,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import Server.HealthHive;
 
-public class LoginWindow {
+public class UserInterface {
     JFrame frame;
     static HealthHive healthHive = new HealthHive();
 
@@ -95,7 +95,8 @@ public class LoginWindow {
 
         staffs.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                staffMenu();
+                StaffMenu staffMenu = new StaffMenu();
+                staffMenu.staffMenu(healthHive);
             }
         });
 
@@ -110,8 +111,6 @@ public class LoginWindow {
 
     }
 
-    public void staffMenu() {
-    }
 
     protected void testMenu() {
     }

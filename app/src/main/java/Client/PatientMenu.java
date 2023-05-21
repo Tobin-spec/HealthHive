@@ -19,7 +19,7 @@ import javax.swing.SwingUtilities;
 import Server.HealthHive;
 import Server.Patient;
 
-public class PatientMenu extends LoginWindow{
+public class PatientMenu extends UserInterface{
 
     public void patientMenu(HealthHive healthHive) {
         frame = new JFrame("Patient Menu");

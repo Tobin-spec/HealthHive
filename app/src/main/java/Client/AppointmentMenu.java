@@ -21,7 +21,7 @@ import Server.Doctor;
 import Server.HealthHive;
 import Server.Patient;
 
-public class AppointmentMenu extends LoginWindow{
+public class AppointmentMenu extends UserInterface{
     
     protected void appointmentMenu(HealthHive healthHive) {
         frame = new JFrame("Appointment Menu");
@@ -315,7 +315,7 @@ public class AppointmentMenu extends LoginWindow{
         frame.setSize(400, 300);
 
         JPanel panel = new JPanel();
-        
+
         JLabel nameLabel = new JLabel("Appointment Id");
         nameLabel.setBounds(10, 20, 80, 25);
         panel.add(nameLabel);
