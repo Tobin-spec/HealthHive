@@ -38,4 +38,8 @@ public class Hospital{
     public void createAppointment(Appointment appointment) {
         this.appointments.add(appointment);
     }
+
+    public void deleteAppointment(Appointment appointment) {
+        this.appointments.remove(appointment);
+    }
 }

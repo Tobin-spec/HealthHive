@@ -298,9 +298,72 @@ public class AppointmentMenu extends LoginWindow{
     }
 
     protected void viewAppointmentMenu() {
+        getWhichAppointment(healthHive.getAllAppointments(), appointment -> {
+            SwingUtilities.invokeLater(() -> {
+                if (appointment != null) {
+                    showAppointmentDetails(appointment);
+                } else {
+                    JOptionPane.showMessageDialog(frame, "Invalid selection!");
+                }
+            });
+        });
     }
 
+    private void showAppointmentDetails(Appointment appointment) {
+        frame = new JFrame("View Appointment " + appointment.getId());
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setSize(400, 300);
+
+        JPanel panel = new JPanel();
+        
+        JLabel nameLabel = new JLabel("Appointment Id");
+        nameLabel.setBounds(10, 20, 80, 25);
+        panel.add(nameLabel);
+
+        JLabel nameField = new JLabel(appointment.getId());
+        nameField.setBounds(100, 20, 165, 25);
+        panel.add(nameField);
+
+        JLabel patientLabel = new JLabel("Patient");
+        patientLabel.setBounds(10, 50, 80, 25);
+        panel.add(patientLabel);
+
+        JLabel patientField = new JLabel(appointment.getPatient().getName());
+        patientField.setBounds(100, 50, 165, 25);
+        panel.add(patientField);
+
+        JLabel DoctorLabel = new JLabel("Age");
+        DoctorLabel.setBounds(10, 80, 80, 25);
+        panel.add(DoctorLabel);
+
+        JLabel DoctorField = new JLabel(appointment.getDoctor().getName());
+        DoctorField.setBounds(100, 80, 80, 25);
+        panel.add(DoctorField);
+
+        JLabel timeLabel = new JLabel("time");
+        timeLabel.setBounds(10, 110, 165, 25);
+        panel.add(timeLabel);
+
+        JLabel timeField = new JLabel(appointment.getTime());
+        timeField.setBounds(100, 110, 165, 50);
+        panel.add(timeField);
+
+        frame.add(panel);
+        panel.setLayout(null);
+        frame.setVisible(true);
+    }
+
+
     protected void deleteAppointmentMenu() {
+        getWhichAppointment(healthHive.getAllAppointments(), appointment -> {
+            SwingUtilities.invokeLater(() -> {
+                if (appointment != null) {
+                    healthHive.deleteAppointment(appointment);
+                } else {
+                    JOptionPane.showMessageDialog(frame, "Invalid selection!");
+                }
+            });
+        });
     }
 
 }

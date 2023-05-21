@@ -54,6 +54,11 @@ public class HealthHive {
         }
     }
 
+    public void deleteAppointment(Appointment appointment) {
+        hospital.deleteAppointment(appointment);
+    }
+
+
     public void donothing() {
     }
     public static void main(String[] args) {
