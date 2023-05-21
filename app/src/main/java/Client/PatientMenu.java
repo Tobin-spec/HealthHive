@@ -143,6 +143,7 @@ public class PatientMenu extends LoginWindow{
     public void getWhichPatient(ArrayList<Patient> allPatients, Consumer<Patient> callback) {
         frame = new JFrame("Select a Patient");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setSize(400, 400);
 
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout());

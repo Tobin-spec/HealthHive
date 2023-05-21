@@ -1,20 +1,18 @@
 package Server;
 
 
-import java.util.ArrayList;
-
 public class Appointment{
     private String time;
     private Patient patient;
-    private ArrayList<HospitalStaff> staffs;
+    private Doctor doctor;
 
     public Appointment() {
     }
 
-    public Appointment(String time, Patient patient, ArrayList<HospitalStaff> staffs) {
+    public Appointment(Patient patient, Doctor doctor, String time) {
         this.time = time;
         this.patient = patient;
-        this.staffs = staffs;
+        this.doctor = doctor;
     }
 
     public void setTime(String time){
@@ -25,8 +23,8 @@ public class Appointment{
         this.patient = patient;
     }
 
-    public void setStaffs(ArrayList<HospitalStaff> staffs) {
-        this.staffs = staffs;
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
     }
 
     public String getTime() {
@@ -37,8 +35,8 @@ public class Appointment{
         return this.patient;
     }
 
-    public ArrayList<HospitalStaff> getStaffs() {
-        return this.staffs;
+    public Doctor getDoctor() {
+        return this.doctor;
     }
  
 }

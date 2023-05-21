@@ -16,8 +16,17 @@ public class HealthHive {
         return hospital.getAllPatients();
     }
 
+    public ArrayList<Doctor> getAllDoctors() {
+        return hospital.getAllDoctors();
+    }
+
     public void deletePatient(Patient patient) {
         hospital.deletePatient(patient);
+    }
+
+    public void createAppointment(Patient patient, Doctor doctor, String time){
+        Appointment appointment = new Appointment(patient, doctor, time);
+        hospital.createAppointment(appointment);
     }
 
     public void editPatient(Patient patient, String name, String email, Integer age, String issue) {
