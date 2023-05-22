@@ -67,10 +67,22 @@ public class HealthHive {
         hospital.deleteDoctor(doctor);
     }
 
+    public void editDoctor(Doctor doctor, String name, String speciality) {
+        for (Doctor d: getAllDoctors()) {
+            if (d.equals(doctor)) {
+                d.setName(name);
+                d.setDepartment(speciality);
+            }
+        }
+    }
+
+
     public void donothing() {
     }
     public static void main(String[] args) {
         UserInterface start = new UserInterface();
         start.loginWindow();
     }
+
+
 }
