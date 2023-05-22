@@ -63,6 +63,9 @@ public class HealthHive {
         hospital.addDoctor(doctor);
     }
 
+    public void deleteDoctor(Doctor doctor) {
+        hospital.deleteDoctor(doctor);
+    }
 
     public void donothing() {
     }

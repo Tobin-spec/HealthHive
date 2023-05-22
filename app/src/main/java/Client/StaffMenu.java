@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 import Server.HealthHive;
 
@@ -68,6 +69,16 @@ public class StaffMenu extends UserInterface{
     }
 
     protected void deleteStaffMenu() {
+        AppointmentMenu appmenu = new AppointmentMenu();
+        appmenu.getWhichDoctor(healthHive.getAllDoctors(), doctor -> {
+            SwingUtilities.invokeLater(() -> {
+                if (doctor != null) {
+                    healthHive.deleteDoctor(doctor);
+                } else {
+                    JOptionPane.showMessageDialog(frame, "Invalid selection!");
+                }
+            });
+        });
     }
 
     protected void addStaffMenu() {
