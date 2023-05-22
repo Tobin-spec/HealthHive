@@ -42,4 +42,8 @@ public class Hospital{
     public void deleteAppointment(Appointment appointment) {
         this.appointments.remove(appointment);
     }
+
+    public void addDoctor(Doctor doctor) {
+        this.doctors.add(doctor);
+    }
 }

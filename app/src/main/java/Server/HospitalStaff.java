@@ -1,9 +1,9 @@
 package Server;
 
 public class HospitalStaff {
-    private String name;
-    private String title;
-    private String department;
+    protected String name;
+    protected String title;
+    protected String department;
 
     public HospitalStaff() {
 

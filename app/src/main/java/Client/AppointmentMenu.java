@@ -83,7 +83,7 @@ public class AppointmentMenu extends UserInterface{
 
                                 frame = new JFrame("Create an Appointment");
                                 frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                                frame.setSize(400, 400);
+                                frame.setSize(400, 300);
                         
                                 JPanel panel = new JPanel();
                                 panel.setLayout(null);
@@ -113,7 +113,7 @@ public class AppointmentMenu extends UserInterface{
                                 panel.add(timField);
 
                                 JButton save = new JButton("Save");
-                                save.setBounds(100, 80, 100, 25);
+                                save.setBounds(100, 110, 100, 25);
 
                                 save.addActionListener(new ActionListener() {
                                     public void actionPerformed(ActionEvent e) {
@@ -127,7 +127,6 @@ public class AppointmentMenu extends UserInterface{
 
                                 panel.add(save);
                                 frame.add(panel);
-                                frame.pack();
                                 frame.setVisible(true);
                             } else {
                                 JOptionPane.showMessageDialog(frame, "Invalid selection!");
@@ -198,6 +197,7 @@ public class AppointmentMenu extends UserInterface{
 
                                 frame = new JFrame("Edit the Appointment " + selectedAppointment.getId());
                                 frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                                frame.setSize(400, 300);
                         
                                 JPanel panel = new JPanel();
                                 panel.setLayout(null);
@@ -227,7 +227,7 @@ public class AppointmentMenu extends UserInterface{
                                 panel.add(timField);
 
                                 JButton save = new JButton("Save");
-                                save.setBounds(100, 80, 100, 25);
+                                save.setBounds(100, 110, 100, 25);
 
                                 save.addActionListener(new ActionListener() {
                                     public void actionPerformed(ActionEvent e) {
@@ -241,7 +241,6 @@ public class AppointmentMenu extends UserInterface{
 
                                 panel.add(save);
                                 frame.add(panel);
-                                frame.pack();
                                 frame.setVisible(true);
                             } else {
                                 JOptionPane.showMessageDialog(frame, "Invalid selection!");
@@ -332,7 +331,7 @@ public class AppointmentMenu extends UserInterface{
         patientField.setBounds(100, 50, 165, 25);
         panel.add(patientField);
 
-        JLabel DoctorLabel = new JLabel("Age");
+        JLabel DoctorLabel = new JLabel("Doctor");
         DoctorLabel.setBounds(10, 80, 80, 25);
         panel.add(DoctorLabel);
 

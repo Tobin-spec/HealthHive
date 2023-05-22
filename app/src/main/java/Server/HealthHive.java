@@ -58,6 +58,11 @@ public class HealthHive {
         hospital.deleteAppointment(appointment);
     }
 
+    public void addDoctor(String name, String speciality) {
+        Doctor doctor = new Doctor(name, speciality);
+        hospital.addDoctor(doctor);
+    }
+
 
     public void donothing() {
     }
@@ -65,5 +70,4 @@ public class HealthHive {
         UserInterface start = new UserInterface();
         start.loginWindow();
     }
-
 }
