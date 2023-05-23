@@ -88,12 +88,18 @@ public class HealthHive {
 
     public void donothing() {
     }
+
+    public void editItem(Item item, Integer quantity) {
+        for (Item i : getAllItems()) {
+            if (i.equals(item)) {
+                i.setCount(quantity);
+            }
+        }
+    }
+    
     public static void main(String[] args) {
         UserInterface start = new UserInterface();
         start.loginWindow();
     }
-
-
-
 
 }

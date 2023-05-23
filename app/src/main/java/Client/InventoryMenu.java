@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 import Server.HealthHive;
 import Server.Item;
@@ -67,6 +68,12 @@ public class InventoryMenu extends UserInterface{
         frame.setVisible(true);
     }
 
+    protected void viewItemMenu() {
+    }
+
+    protected void useItemMenu() {
+    }
+
     protected void addItemMenu() {
         frame = new JFrame("Add New Item");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -110,8 +117,60 @@ public class InventoryMenu extends UserInterface{
     }
 
     protected void refillItemMenu() {
-
+        getWhichItem(healthHive.getAllItems(), item -> {
+            SwingUtilities.invokeLater(() -> {
+                if (item != null) {
+                    showItemDetailRefill(item);
+                } else {
+                    JOptionPane.showMessageDialog(frame, "Invalid selection!");
+                }
+            });
+        });
     }
+
+    private void showItemDetailRefill(Item item) {
+        frame = new JFrame("Refill " + item.getName());
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setSize(400, 300);
+
+        JPanel panel = new JPanel();
+
+        JLabel nameLabel = new JLabel("Name");
+        nameLabel.setBounds(10, 20, 80, 25);
+        panel.add(nameLabel);
+
+        JLabel nameField = new JLabel(item.getName());
+        nameField.setBounds(100, 20, 165, 25);
+        panel.add(nameField);
+
+
+        JLabel quantityLabel = new JLabel("Quantity");
+        quantityLabel.setBounds(10, 50, 80, 25);
+        panel.add(quantityLabel);
+
+        JTextField quantityField = new JTextField(item.getCount().toString());
+        quantityField.setBounds(100, 50, 80, 25);
+        panel.add(quantityField);
+
+        JButton save = new JButton("Save");
+        save.setBounds(100, 85, 100, 25);
+
+        save.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                Integer quantity = Integer.parseInt(quantityField.getText());
+
+                healthHive.editItem(item, quantity);
+                JOptionPane.showMessageDialog(frame, "The Details has been updated Successfully!");
+            }
+        });
+
+        panel.add(save);
+
+        frame.add(panel);
+        panel.setLayout(null);
+        frame.setVisible(true);
+    }
+
 
     public void getWhichItem(ArrayList<Item> allItems, Consumer<Item> callback) {
         frame = new JFrame("Select an Item");
