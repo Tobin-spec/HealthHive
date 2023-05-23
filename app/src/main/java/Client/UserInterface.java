@@ -83,7 +83,8 @@ public class UserInterface {
 
         inventory.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                inventoryMenu();
+                InventoryMenu inventoryMenu = new InventoryMenu();
+                inventoryMenu.inventoryMenu(healthHive);
             }
         });
 

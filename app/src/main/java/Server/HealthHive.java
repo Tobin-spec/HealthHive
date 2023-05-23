@@ -76,6 +76,15 @@ public class HealthHive {
         }
     }
 
+    public void addItem(String name, Integer quantity) {
+        Item item  = new Item(name, quantity);
+        hospital.addItem(item);
+    }
+
+    public ArrayList<Item> getAllItems() {
+        return hospital.getInventory().getItems();
+    }
+
 
     public void donothing() {
     }
@@ -83,6 +92,8 @@ public class HealthHive {
         UserInterface start = new UserInterface();
         start.loginWindow();
     }
+
+
 
 
 }

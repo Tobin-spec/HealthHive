@@ -7,6 +7,7 @@ public class Hospital{
     private ArrayList<Doctor> doctors = new ArrayList<>();
     private ArrayList<Patient> patients = new ArrayList<Patient>();
     private ArrayList<Appointment> appointments = new ArrayList<>();
+    private Inventory inventory = new Inventory();
     
     public Hospital() {
     }
@@ -25,6 +26,14 @@ public class Hospital{
 
     public ArrayList<Appointment> getAllAppointments() {
         return this.appointments;
+    }
+
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    public void addItem(Item item) {
+        this.inventory.addItem(item);
     }
 
     public void AddPatient(Patient patient) {
