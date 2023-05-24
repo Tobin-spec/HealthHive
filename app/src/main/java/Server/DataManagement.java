@@ -1,10 +1,8 @@
 package Server;
 
-import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
@@ -18,8 +16,8 @@ public class DataManagement {
 
     public void getData() throws IOException {
 
-        InputStream inputStream = getClass().getResourceAsStream("/Server/HealthHive.data");
-        Scanner scan = new Scanner(inputStream, "UTF-8");
+      File file = new File("data/HealthHive.data");
+      Scanner scan = new Scanner(file, "UTF-8");
   
         // Skip invalid entries
         while (scan.hasNextLine()) {
@@ -50,23 +48,13 @@ public class DataManagement {
     }
 
     public void saveData(String content) {
-      String filePath = "app/src/main/java/Server/HealthHive.data";
+      String filePath = "data/HealthHive.data";
   
-      try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("Server/HealthHive.data");
-           FileWriter writer = new FileWriter(filePath)) {
-  
-          InputStreamReader reader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
-          BufferedReader bufferedReader = new BufferedReader(reader);
-  
-          String line;
-          while ((line = bufferedReader.readLine()) != null) {
-              writer.write(line);
-              writer.write(System.lineSeparator());
-          }
-  
-          writer.write(content);
+      try (FileWriter writer = new FileWriter(filePath, StandardCharsets.UTF_8)) {
+        writer.write(content);
+        writer.close();
       } catch (IOException e) {
-          e.printStackTrace();
+        e.printStackTrace();
       }
-  }
+    }
 }
