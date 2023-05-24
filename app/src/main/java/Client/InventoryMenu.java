@@ -69,6 +69,42 @@ public class InventoryMenu extends UserInterface{
     }
 
     protected void viewItemMenu() {
+        getWhichItem(healthHive.getAllItems(), item -> {
+            SwingUtilities.invokeLater(() -> {
+                if (item != null) {
+                    frame = new JFrame(item.getName());
+                    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    frame.setSize(400, 300);
+
+                    JPanel panel = new JPanel();
+
+                    JLabel nameLabel = new JLabel("Name");
+                    nameLabel.setBounds(10, 20, 80, 25);
+                    panel.add(nameLabel);
+
+                    JLabel nameField = new JLabel(item.getName());
+                    nameField.setBounds(100, 20, 165, 25);
+                    panel.add(nameField);
+
+
+                    JLabel quantityLabel = new JLabel("Quantity");
+                    quantityLabel.setBounds(10, 50, 80, 25);
+                    panel.add(quantityLabel);
+
+                    JLabel quantityField = new JLabel(item.getCount().toString());
+                    quantityField.setBounds(100, 50, 80, 25);
+                    panel.add(quantityField);
+
+    
+
+                    frame.add(panel);
+                    panel.setLayout(null);
+                    frame.setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(frame, "Invalid selection!");
+                }
+            });
+        });
     }
 
     protected void useItemMenu() {
@@ -257,7 +293,7 @@ public class InventoryMenu extends UserInterface{
 
         panel.add(button);
         frame.add(panel);
-        frame.pack();
+        //frame.pack();
         frame.setVisible(true);
     }
 
