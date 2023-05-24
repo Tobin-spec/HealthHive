@@ -23,6 +23,10 @@ import Server.Patient;
 
 public class AppointmentMenu extends UserInterface{
     
+    public AppointmentMenu() {
+        super(healthHive);
+    }
+
     protected void appointmentMenu(HealthHive healthHive) {
         frame = new JFrame("Appointment Menu");
         frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);

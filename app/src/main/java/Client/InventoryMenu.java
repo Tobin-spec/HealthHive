@@ -22,6 +22,10 @@ import Server.Item;
 
 public class InventoryMenu extends UserInterface{
 
+    public InventoryMenu() {
+        super(healthHive);
+    }
+
     public void inventoryMenu(HealthHive healthHive) {
         frame = new JFrame("Inventory Menu");
         frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);

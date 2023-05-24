@@ -17,6 +17,10 @@ import Server.HealthHive;
 
 public class StaffMenu extends UserInterface{
 
+    public StaffMenu() {
+        super(healthHive);
+    }
+
     public void staffMenu(HealthHive healthHive) {
         frame = new JFrame("Staff Menu");
         frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);

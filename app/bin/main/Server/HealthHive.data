@@ -1,0 +1,10 @@
+Patient1:nothing:34: Fever
+Patient2:something:20: Cold
+-Cotton Rolls:10000
+-Polaris b:10000
+--Doctor1: Cardiology
+Patient1:nothing:34: Fever
+Patient2:something:28: Cold
+-Cotton Rolls:10000
+-Polaris b:10000
+--Doctor1: Cardiology

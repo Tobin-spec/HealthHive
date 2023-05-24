@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -14,6 +15,10 @@ import Server.HealthHive;
 public class UserInterface {
     JFrame frame;
     static HealthHive healthHive = new HealthHive();
+
+    public UserInterface(HealthHive healthHive) {
+        UserInterface.healthHive = healthHive;
+    }
 
     public void loginWindow() {
         frame = new JFrame();
@@ -31,7 +36,7 @@ public class UserInterface {
         passwordLabel.setBounds(10, 50, 80, 25);
         frame.add(passwordLabel);
 
-        JPasswordField password = new JPasswordField();
+        JTextField password = new JPasswordField();
         password.setBounds(100, 50, 165, 25);
 
         JButton login = new JButton("Login");
@@ -40,7 +45,13 @@ public class UserInterface {
         login.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
-                mainMenu();
+                if (userName.getText().equals("Admin") && password.getText().equals("12345")) {
+                    mainMenu();
+                } else {
+                    JOptionPane.showMessageDialog(frame, "Invalid Credentials!");
+                    loginWindow();
+                }
+
             }
         });
 

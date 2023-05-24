@@ -1,5 +1,6 @@
 package Server;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import Client.UserInterface;
@@ -108,10 +109,31 @@ public class HealthHive {
             }
         }
     }
+
+    public String getAllData() {
+        String data = "";
+        for (Patient p : getAllPatients()) {
+            data += p.getName() + ":" + p.getEmail() + ":" + p.getAge() + ":" + p.getIssue() + "\n";
+        }
+        for (Item itm : getAllItems()) {
+            data += "-" + itm.getName() + ":" + itm.getCount() + "\n";
+        }
+        for (Doctor d : getAllDoctors()) {
+            data += "--" + d.getName() + ":" + d.getDepartment() + "\n";
+        }
+
+        return data;
+    }
     
-    public static void main(String[] args) {
-        UserInterface start = new UserInterface();
+    public static void main(String[] args) throws IOException {
+        HealthHive healthHive = new HealthHive();
+        DataManagement dataManagement = new DataManagement(healthHive);
+        dataManagement.getData();
+        UserInterface start = new UserInterface(healthHive);
         start.loginWindow();
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            dataManagement.saveData(healthHive.getAllData());
+        }));
     }
 
 }
