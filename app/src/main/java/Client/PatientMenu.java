@@ -169,7 +169,6 @@ public class PatientMenu extends UserInterface{
 
         panel.add(button);
         frame.add(panel);
-        frame.pack();
         frame.setVisible(true);
     }
 

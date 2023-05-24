@@ -59,12 +59,11 @@ public class UserInterface {
         frame.setSize(400, 300);
 
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(5, 1));
+        buttonPanel.setLayout(new GridLayout(4, 1));
 
         JButton patients = new JButton("Patient Management");
         JButton appointments = new JButton("Appointment Management");
         JButton inventory = new JButton("Inventory Management");
-        JButton tests = new JButton("Tests Management");
         JButton staffs = new JButton("Staff Management");
 
         patients.addActionListener(new ActionListener() {
@@ -88,12 +87,6 @@ public class UserInterface {
             }
         });
 
-        tests.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                testMenu();
-            }
-        });
-
         staffs.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 StaffMenu staffMenu = new StaffMenu();
@@ -104,7 +97,6 @@ public class UserInterface {
         buttonPanel.add(patients);
         buttonPanel.add(appointments);
         buttonPanel.add(inventory);
-        buttonPanel.add(tests);
         buttonPanel.add(staffs);
 
         frame.add(buttonPanel);
@@ -112,11 +104,4 @@ public class UserInterface {
 
     }
 
-
-    protected void testMenu() {
-    }
-
-    protected void inventoryMenu() {
-    }
-   
 }
