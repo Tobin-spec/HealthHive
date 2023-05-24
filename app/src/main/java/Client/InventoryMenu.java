@@ -72,6 +72,62 @@ public class InventoryMenu extends UserInterface{
     }
 
     protected void useItemMenu() {
+        getWhichItem(healthHive.getAllItems(), item -> {
+            SwingUtilities.invokeLater(() -> {
+                if (item != null) {
+                    frame = new JFrame(item.getName());
+                    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    frame.setSize(400, 300);
+            
+                    JPanel panel = new JPanel();
+            
+                    JLabel nameLabel = new JLabel("Name");
+                    nameLabel.setBounds(10, 20, 80, 25);
+                    panel.add(nameLabel);
+            
+                    JLabel nameField = new JLabel(item.getName());
+                    nameField.setBounds(130, 20, 165, 25);
+                    panel.add(nameField);
+            
+            
+                    JLabel quantityLabel = new JLabel("Available Quantity");
+                    quantityLabel.setBounds(10, 50, 80, 25);
+                    panel.add(quantityLabel);
+            
+                    JLabel quantityField = new JLabel(item.getCount().toString());
+                    quantityField.setBounds(130, 50, 80, 25);
+                    panel.add(quantityField);
+
+                    JLabel useLabel = new JLabel("Number of items to use");
+                    useLabel.setBounds(10, 80, 120, 25);
+                    panel.add(useLabel);
+            
+                    JTextField useField = new JTextField();
+                    useField.setBounds(130, 80, 80, 25);
+                    panel.add(useField);
+            
+                    JButton save = new JButton("Save");
+                    save.setBounds(130, 115, 100, 25);
+            
+                    save.addActionListener(new ActionListener() {
+                        public void actionPerformed(ActionEvent e) {
+                            Integer quantity = Integer.parseInt(useField.getText());
+            
+                            healthHive.useItem(item, quantity);;
+                            JOptionPane.showMessageDialog(frame, "The Details has been updated Successfully!");
+                        }
+                    });
+            
+                    panel.add(save);
+            
+                    frame.add(panel);
+                    panel.setLayout(null);
+                    frame.setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(frame, "Invalid selection!");
+                }
+            });
+        });
     }
 
     protected void addItemMenu() {

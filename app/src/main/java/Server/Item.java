@@ -31,4 +31,8 @@ public class Item {
         this.count = count;
     }
 
+    public void useItem(Integer num) {
+        this.count -= num;
+    }
+
 }

@@ -96,6 +96,18 @@ public class HealthHive {
             }
         }
     }
+
+    public Inventory getInventory() {
+        return hospital.getInventory();
+    }
+
+    public void useItem(Item item, Integer quantity) {
+        for (Item i : getAllItems()) {
+            if (i.equals(item)) {
+                i.useItem(quantity);
+            }
+        }
+    }
     
     public static void main(String[] args) {
         UserInterface start = new UserInterface();

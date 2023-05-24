@@ -29,7 +29,7 @@ public class Hospital{
     }
 
     public Inventory getInventory() {
-        return inventory;
+        return this.inventory;
     }
 
     public void addItem(Item item) {
